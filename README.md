@@ -45,6 +45,7 @@ npm install -D sass
 
 ## Open vite.config.js and add ``  'resources/sass/app.scss' `` in the input section
 
+```
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
@@ -59,6 +60,7 @@ export default defineConfig({
         }),
     ],
 });
+```
 
 This configuration tells Vite to include the `app.scss` and `app.js` files during the build process.
 
@@ -72,9 +74,11 @@ import 'bootstrap';
 
 Paul Phillips: Not sure if this is specific to Laravel 11 but `resources/js/app.js already had import ‘./bootstrap’; which was initially confusing until I spotted the difference and ended up with:
 
+```
 import ‘bootstrap’; // Bootstrap Framework
 
 import ‘./bootstrap’; // Laravel axios
+```
 
 From versions 5.7 to 8.x, the syntax was `require(‘./bootstrap’);`. Starting from version 9.x, the `app.js` file contains that line.
 
