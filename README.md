@@ -1,24 +1,29 @@
-Bootstrap is a popular front-end framework that provides a collection of CSS and JavaScript components for building responsive and mobile-first web applications. Integrating Bootstrap with Laravel, a powerful PHP web framework, can streamline the development process and enhance the user experience of your web applications. In this article, we’ll guide you through the steps to install and configure Bootstrap 5 with Laravel 9/10/11.
+### Bootstrap is a popular front-end framework that provides a collection of CSS and JavaScript components for building responsive and mobile-first web applications. Integrating Bootstrap with Laravel, a powerful PHP web framework, can streamline the development process and enhance the user experience of your web applications. In this article, we’ll guide you through the steps to install and configure Bootstrap 5 with Laravel 9/10/11.
 
-Prerequisites
+## Prerequisites
 Before we begin, ensure that you have the following prerequisites installed on your system:
 
 - Laravel 9/10/11 project set up
 - Node.js and npm (Node Package Manager) installed
 
-Step 1: Install Bootstrap via npm
+## Step 1: Install Bootstrap via npm
 
 Open your terminal or command prompt, navigate to the root directory of your Laravel project, and run the following command to install Bootstrap 5:
 
+``
 npm install -D bootstrap@5.3.3
+``
 This command installs Bootstrap 5.3.3 as a development dependency for your project.
 
-Step 2: Install Sass
+## Step 2: Install Sass
 
 Since we will use Sass for styling, we need to install the Sass compiler. Run the following command:
 
+```
 npm install -D sass
-Step 3: Install Dependencies
+```
+
+## Step 3: Install Dependencies
 
 After installing Bootstrap and Sass, you need to install the project’s remaining dependencies. Run the following command:
 
