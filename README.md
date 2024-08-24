@@ -115,3 +115,133 @@ npm run dev
 This command will compile your Sass and JavaScript files, including the Bootstrap assets.
 
 Congratulations! You have successfully installed and configured Bootstrap 5 with Laravel 9/10/11. You can now start using Bootstrap components and utilities in your Laravel application.
+
+# Install vue js in laravel project
+
+Introduction to Vue.js in Laravel
+Vue.js is a JavaScript framework for building user interfaces.
+
+While it’s flexible enough to be integrated into any web project (Rails, Symfony, WordPress, etc.), it’s one of the preferred choices of Laravel developers, especially when coupled to Inertia.js.
+
+That being said, figuring out how to set up your bundling process while using a major JavaScript framework is insanely complicated.
+
+Therefore, I decided to write this short guide that walks you through adding Vue.js to your Laravel project.
+
+## Install Vue.js in Laravel via NPM
+## First, add Vue and the plugin that will enable a seemless integration with Vite (the default bundler used by Laravel).
+
+```
+npm install vue @vitejs/plugin-vue
+```
+
+Configure Vite for Vue.js in Laravel
+In the previous step, we added a crucial plugin that enables support for Vue in Vite. We now must make use of it.
+
+In vite.config.js, make the following modifications:
+
+```
+import { defineConfig } from 'vite'
+import laravel from 'laravel-vite-plugin'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+        }),
+        vue(),
+    ],
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js',
+        },
+    },
+})
+```
+
+Important: The alias from vue to vue.esm-bundler.js instructs Vite to use a version of Vue.js that also bundles the compiler which will allow us to write HTML instead of render() functions (thankfully!).
+
+## Initialize Vue.js
+Inside resources/js/app.js, initialize Vue by adding the following:
+
+```
+import { createApp } from 'vue'
+
+const app = createApp()
+
+app.mount('#app')
+```
+
+We import Vue and create a variable for the createApp() function.
+Then, we instantiate Vue by calling the function and store it in a constant called app (you will see later why).
+Finally, we mount our Vue.js application inside a #app element that we will create.
+Now, do not forget to include your JavaScript using the @vite directive and create a <div> tag with an “app” ID in your HTML.
+
+```
+<!DOCTYPE html>
+<html>
+	<head>
+		…
+		
+		@vite(['resources/js/app.js'])
+	</head>
+	<body>
+		<div id="app">
+			<!-- Vue.js components will be processed here. -->
+		</div>
+	</body>
+</html>
+```
+
+## Make sure Vue.js is operational
+## Create a component called Counter in resources/js/components/Counter.vue:
+
+```
+<script setup>
+    import { ref } from 'vue'
+
+    const count = ref(0)
+</script>
+
+<template>
+    {{ count }}
+
+    <button @click="count++">
+        Add
+    </button>
+</template>
+```
+
+## Register Counter.vue to let Vue know of its existence:
+
+```
+import { createApp } from 'vue'
+import Counter from './components/Counter.vue'
+
+const app = createApp()
+
+app.component('counter', Counter)
+
+app.mount('#app')
+```
+
+### Then, call it in the div#app we set up earlier:
+
+```
+<div id="app">
+    <counter />
+</div>
+```
+
+### Compile your code
+The only step left if to compile your code and preview the result in your browser.
+
+Run the following command:
+
+npm run dev
+That’s all there is to it! Check your browser and it all should be working.
+
+You’ve successfully added Vue.js to your Laravel project and you can now start having fun by building something amazing!
+
+
